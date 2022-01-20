@@ -11,7 +11,8 @@ const places = require("./routes/places")
 const products =require("./routes/products")
 
 mongoose
-  .connect(`mongodb://localhost:27017/toutisDB`)
+  // .connect(`mongodb://localhost:27017/toutisDB`)
+  .connect(`mongodb+srv://suaad:${process.env.MONGODB_PASSWORD1}@cluster0.jvtwl.mongodb.net/toutisDB?retryWrites=true&w=majority`)
   .then(() => console.log("Connected to MongoDB"))
   .catch(error => console.log("Erroe connecting to MongoDB", error))
 
@@ -25,6 +26,6 @@ app.use("/api/places", places)
 app.use("/api/products", products)
 
 
-const port = 5000
+const port = process.env.PORT || 5000
 
 app.listen(port, () => console.log("Server is listening " + port))
