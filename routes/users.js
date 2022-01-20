@@ -100,7 +100,7 @@ router.post("/add-admin",checkAdmin, validateBody(signupJoi), async (req, res) =
   }
 })
 
-router.post("/login", validateBody(loginJoi), async (req, res) => {
+router.post("/loginadmin", validateBody(loginJoi), async (req, res) => {
   try {
     const { email, password } = req.body //------------------نستخرج البودي
 
@@ -109,6 +109,8 @@ router.post("/login", validateBody(loginJoi), async (req, res) => {
 
     const vaild = await bcrypt.compare(password, user.password)
     if (!vaild) return res.status(400).send("password incorrect")
+
+if (user.role != "Admin")  return res.status(403).send("you are not admin")
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECREY_KEY, { expiresIn: "15d" })
     res.send(token)
