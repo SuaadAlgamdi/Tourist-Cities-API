@@ -15,10 +15,10 @@ const citySchema = new mongoose.Schema({
   name: String,
   description: String,
   photo: String,
-  video: String,
+  // video: String,
   lat:Number,
   long:Number,
-  //--------------------------------------------------زي actors, Cast-------//
+  //-------------------------------------------------- actors, Cast-------//
   restaurants: [
     {
       type: mongoose.Types.ObjectId,
